@@ -12,6 +12,12 @@
   --font-mono: var(--font-geist-mono);
 }
 
+@layer base {
+  body {
+    @apply text-black dark:text-white bg-white dark:bg-black;
+  }
+}
+
 @media (prefers-color-scheme: dark) {
   :root {
     --background: #0a0a0a;
