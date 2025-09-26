@@ -19,7 +19,8 @@ export default function Footer() {
 
 
   return (
-    <div className="bg-[#1E293B] text-white">
+    <div className="bg-[#111827] text-white">
+
       {/* Main Hero Section */}
       <div className="px-[40px] py-[80px]">
         <div className="max-w-[1200px] mx-auto">
