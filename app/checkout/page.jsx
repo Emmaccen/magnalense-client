@@ -9,13 +9,26 @@ import { useState } from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import Payment from "./payment";
 import Review from "./review";
+import { useRouter } from "next/navigation";
 
 export default function CheckoutPage() {
   const [selectPaymentMethod, setSelectPaymentMethod] = useState(null);
-  const [selectDeliveryPaymentMethod, setSelectDeliveryPaymentMethod] =
-    useState("");
+  // const [selectDeliveryPaymentMethod, setSelectDeliveryPaymentMethod] = useState("");
+  const [inputText, setInputText] = useState('')
+  const router = useRouter() 
+  
+  function saveInputText(event){     //this function saves the data that is typed into the input fields 
+    setInputText(event.target.value)
+  }
+
+  function handleContinueToPayment(){   //I want this button to take me to the payment page
+    router.push("/payment")   
+  }
+
+
 
   return (
+
     <>
       <title>Checkout Page</title>
       <link rel="icon" type="image/svg+xml" href="/phone-solid-full.svg" />
@@ -133,6 +146,7 @@ export default function CheckoutPage() {
                             required
                             className="peer w-full rounded-[0.623rem] border text-[#919191] border-[#D1D5DB] px-[1.25rem] pt-2 placeholder-transparent focus:border-[#111827] focus:outline-none"
                             placeholder="Email address"
+                            onChange={saveInputText}
                           />
                           <label
                             htmlFor="email"
@@ -380,7 +394,9 @@ export default function CheckoutPage() {
                       </label>
                     </div>
 
-                    <button className="w-[16.6rem]  py-[0.7rem] px-[4.28rem] text-[0.8rem] hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white rounded-[3.88rem] bg-[#030712] dark:bg-[#919191] dark:text-black text-white my-[3.2rem] ">
+                    <button 
+                    onClick={handleContinueToPayment}
+                    className="w-[16.6rem]  py-[0.7rem] px-[4.28rem] text-[0.8rem] hover:bg-white hover:text-black dark:hover:bg-black dark:hover:text-white rounded-[3.88rem] bg-[#030712] dark:bg-[#919191] dark:text-black text-white my-[3.2rem] ">
                       Continue to payment
                     </button>
                   </div>

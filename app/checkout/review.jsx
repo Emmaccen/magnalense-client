@@ -1,3 +1,5 @@
+
+"use client"
 import Image from "next/image";
 import React from "react";
 import { useState } from "react";
@@ -68,6 +70,55 @@ export default function review() {
     );
   }
 
+    const orderReviews = [{
+      Image:{
+        src: "glasses-review.svg",
+        alt: "Review Glasses",
+        width: 35,
+        height: 35,
+      },
+
+       nameOfGlasses: "Ralphodile's BinoBinoculars",
+        color: 'Color',
+        size: 'Size M',
+        price: '$12.99',
+
+        img: {
+            src: "minus.svg",
+            alt: "Minus",
+            width: 17,
+            height: 17,
+        }
+      },
+
+      {
+      Image:{
+        src: "glasses-review.svg",
+        alt: "Review Glasses",
+        width: 35,
+        height: 35,
+      },
+        nameOfGlasses: "Ralphodile's BinoBinoculars",
+        color: 'Color',
+        size: 'Size M',
+        price: '$12.99'
+      },
+
+      {
+      Image: {
+        src: "glasses-review.svg",
+        alt: "Review Glasses",
+        width: 35,
+        height: 35,
+      },
+        nameOfGlasses: "Ralphodile's BinoBinoculars",
+        color: 'Color',
+        size: 'Size M',
+        price: '$12.99'
+      },
+    
+  ]  
+
   return (
     <>
       <h3 className="font-medium text-[0.9rem] ">Review your order</h3>
@@ -75,36 +126,39 @@ export default function review() {
         Estimated delivery is: 23rd Feb, 2025
       </p>
 
-      <div className="flex  items-center gap-5  flex-wrap">
+
+     {orderReviews.map((orderReview, index) => (
+      <div className="flex items-center gap-5  flex-wrap" key={index}>
         <Image
-          src="glasses-review.svg"
-          alt="Review Glasses"
-          width={35}
-          height={35}
+          src={orderReview.Image.src}
+          alt={orderReview.Image.alt}
+          width={orderReview.Image.width}
+          height={orderReview.Image.height}
         />
 
         <div className="">
           <h3 className="text-[0.7rem] text-[#000000] font-medium">
-            Ralphodile's BinoBinoculars
+            {orderReview.nameOfGlasses}
           </h3>
 
           <div className="flex items-center gap-1">
-            <p className="text-[#919191] font-medium text-[0.6rem] ">Color:</p>
+            <p className="text-[#919191] font-medium text-[0.6rem] ">{orderReview.color}:</p>
             <span className="w-[0.6rem] h-[0.6rem] rounded-[0.6rem] bg-[#98BE9E] "></span>
             <span className=" text-[#5C5F6A] ">—</span>
             <span className=" text-[#919191] font-medium text-[0.6rem] ">
-              Size: M
+              {orderReview.size}
             </span>
           </div>
         </div>
-        <p className="font-bold text-[0.7rem]">$12.99</p>
+        <p className="font-bold text-[0.7rem]">{orderReview.price}</p>
 
+      {orderReview.img && (
         <div className="flex border justify-between border-[#E5E7EB] py-[0.3rem] px-[1.5rem] gap-4 rounded-full ">
           <Image
-            alt="Minus"
-            src="minus.svg"
-            width={17}
-            height={17}
+            src={orderReview.img.src}
+            alt={orderReview.img.alt}
+            width={orderReview.img.width}
+            height={orderReview.img.height}
             onClick={removeFromCart}
             className=""
           />
@@ -118,7 +172,7 @@ export default function review() {
             className=""
           />
         </div>
-
+      )}
         <div className="py-[1.6rem]">
           <div className="relative bg-gray-100 dark:bg-gray-800 p-4 rounded-full w-[2rem] h-[2rem]">
             {/* Cancel Button */}
@@ -133,6 +187,13 @@ export default function review() {
           </div>
         </div>
       </div>
+     ))
+}
+
+
+
+
+
       <div className="flex  items-center gap-5 mt-[1rem] flex-wrap">
         <Image
           src="glasses-review.svg"

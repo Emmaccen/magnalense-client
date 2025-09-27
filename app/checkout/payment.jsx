@@ -7,9 +7,8 @@ import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { toast as sonnerToast } from "sonner";
 
 export default function payment() {
-  const [selectPaymentMethod, setSelectPaymentMethod] = useState(null);
-  const [selectDeliveryPaymentMethod, setSelectDeliveryPaymentMethod] =
-    useState("");
+  const [selectPaymentMethod, setSelectPaymentMethod] = useState(false);
+  const [selectDeliveryPaymentMethod, setSelectDeliveryPaymentMethod] = useState(false);
 
   function toast(toast) {
     return sonnerToast.custom((id) => (
@@ -24,6 +23,15 @@ export default function payment() {
         }}
       />
     ));
+  }
+
+
+  
+  function handleClickPayment(){
+    setSelectPaymentMethod((prevSelect) => !prevSelect)
+  }
+  function handleClick(){
+    setSelectDeliveryPaymentMethod((prevSelectDelivery) => !prevSelectDelivery)
   }
 
   function Toast(props) {
@@ -75,8 +83,8 @@ export default function payment() {
             <div className="flex items-center my-[1rem] justify-between w-[33.6em] border border-gray-300 rounded-lg px-4 py-2">
               <div className="flex justify-between w-full items-center ">
                 <RadioGroup
-                  value={selectPaymentMethod}
-                  onChange={setSelectPaymentMethod}
+                 // value={selectPaymentMethod}
+                 // onSubmit={handleClickPayment}
                   aria-label="Payment Method"
                   className="space-y-2 flex w-full items-center justify-between"
                 >
@@ -97,10 +105,11 @@ export default function payment() {
                     </div>
                     <CheckCircleIcon
                       className={`ml-auto w-4 h-4 rounded-full transition ${
-                        selectPaymentMethod === "Debit"
+                        selectPaymentMethod 
                           ? "bg-white text-black"
                           : "bg-[#9CA3AF] text-white dark:text-white"
-                      }`}
+                       }`}
+                       onClick={handleClickPayment}
                     />
                   </Radio>
                 </RadioGroup>
@@ -110,8 +119,8 @@ export default function payment() {
             <div className="flex items-center my-[1rem] justify-between w-[33.6em] border border-gray-300 rounded-lg px-4 py-2">
               <div className="flex justify-between w-full items-center ">
                 <RadioGroup
-                  value={selectDeliveryPaymentMethod}
-                  onChange={setSelectDeliveryPaymentMethod}
+                  //value={selectDeliveryPaymentMethod}
+                  //onChange={setSelectDeliveryPaymentMethod}
                   aria-label="Server size"
                   className="space-y-2 flex w-full items-center justify-between"
                 >
@@ -131,10 +140,11 @@ export default function payment() {
                     </div>
                     <CheckCircleIcon
                       className={`ml-auto w-4 h-4 rounded-full transition ${
-                        selectDeliveryPaymentMethod === "Debit"
+                        selectDeliveryPaymentMethod 
                           ? "bg-white text-black"
                           : "bg-[#9CA3AF] text-white dark:text-white"
-                      }`}
+                       }`}
+                       onClick={handleClick}
                     />
                   </Radio>
                 </RadioGroup>
