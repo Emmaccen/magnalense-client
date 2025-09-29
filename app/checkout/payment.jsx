@@ -1,14 +1,21 @@
+
+
 "use client";
 import React from "react";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Field, Label, Radio, RadioGroup } from "@headlessui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import { toast as sonnerToast } from "sonner";
 
 export default function payment() {
   const [selectPaymentMethod, setSelectPaymentMethod] = useState(false);
   const [selectDeliveryPaymentMethod, setSelectDeliveryPaymentMethod] = useState(false);
+ 
+  
+
+
+
 
   function toast(toast) {
     return sonnerToast.custom((id) => (

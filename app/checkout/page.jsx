@@ -5,24 +5,40 @@ import Link from "next/link";
 import Image from "next/image";
 import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Field, Label, Radio, RadioGroup } from "@headlessui/react";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
 import Payment from "./payment";
 import Review from "./review";
 import { useRouter } from "next/navigation";
+import axios from "axios";
+
 
 export default function CheckoutPage() {
   const [selectPaymentMethod, setSelectPaymentMethod] = useState(null);
   // const [selectDeliveryPaymentMethod, setSelectDeliveryPaymentMethod] = useState("");
   const [inputText, setInputText] = useState('')
   const router = useRouter() 
-  
+  const [countries, setCountries] = useState([])
+
+
+  {/**this particular API did not work that is why I won't be using it for now */}
+
+  // useEffect(() => {           this api only runs when the first time the page is loaded
+  //    axios.get('https://countrycode.dev/api/countries')
+  // .then((response) => {
+  //   setCountries(response.data)
+  // })
+  // }, [])
+
+
+
+
   function saveInputText(event){     //this function saves the data that is typed into the input fields 
     setInputText(event.target.value)
   }
 
   function handleContinueToPayment(){   //I want this button to take me to the payment page
-    router.push("/payment")   
+    router.push("/checkout/payment")   
   }
 
 
@@ -223,11 +239,16 @@ export default function CheckoutPage() {
 
                       <div className="flex gap-[1.6rem] my-[1rem]">
                         <div className="flex items-center   max-w-md">
+
+                          {/* {countries.map((country) => { */}
+                          {/* return( */}
                           <select className="w-[16rem] py-2 px-[1rem] text-[0.7rem] border  text-[#4B5563]  border-[#D1D5DB] rounded-[0.63rem] focus:outline-none focus:ring-1 focus:ring-[#111827]">
                             <option value="+234" className="text-[#4B5563] ">
-                              Country
+                             Country
+                              {/* {country.name} */}
                             </option>
                             <option value="+234" className="text-[#4B5563]">
+                              {/* {country.code} */}
                               +234
                             </option>
                             <option value="+1" className="text-[#4B5563]">
@@ -240,6 +261,8 @@ export default function CheckoutPage() {
                               +91
                             </option>
                           </select>
+                          {/* )
+                          })} */}
                         </div>
 
                         <div className="flex items-center max-w-md">

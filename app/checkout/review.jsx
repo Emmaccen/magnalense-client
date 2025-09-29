@@ -81,7 +81,7 @@ export default function review() {
        nameOfGlasses: "Ralphodile's BinoBinoculars",
         color: 'Color',
         size: 'Size M',
-        price: '$12.99',
+        priceCents: '$12.99',
 
         img: {
             src: "minus.svg",
@@ -101,7 +101,7 @@ export default function review() {
         nameOfGlasses: "Ralphodile's BinoBinoculars",
         color: 'Color',
         size: 'Size M',
-        price: '$12.99'
+        priceCents: '$12.99'
       },
 
       {
@@ -114,7 +114,7 @@ export default function review() {
         nameOfGlasses: "Ralphodile's BinoBinoculars",
         color: 'Color',
         size: 'Size M',
-        price: '$12.99'
+        priceCents: '$12.99'
       },
     
   ]  
@@ -150,7 +150,7 @@ export default function review() {
             </span>
           </div>
         </div>
-        <p className="font-bold text-[0.7rem]">{orderReview.price}</p>
+         <p className="font-bold text-[0.7rem]">${(orderReview.priceCents / 100).toFixed(2) }</p>    {/*this is because 1 dollar = 100 cents and toFixed function tells us how many decimal places it should be*/}
 
       {orderReview.img && (
         <div className="flex border justify-between border-[#E5E7EB] py-[0.3rem] px-[1.5rem] gap-4 rounded-full ">
