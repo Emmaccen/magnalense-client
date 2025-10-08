@@ -2,12 +2,12 @@
 
 :root {
   --background: #ffffff;
-  --foreground: #171717;
+  --foreground: black;
 }
 
 @theme inline {
   --color-background: var(--background);
-  --color-foreground: var(--foreground);
+  --color-primary: var(--foreground);
   --font-sans: var(--font-geist-sans);
   --font-mono: var(--font-geist-mono);
 }
@@ -15,6 +15,13 @@
 @layer base {
   body {
     @apply text-black dark:text-white bg-white dark:bg-black;
+  }
+
+  p {
+    @apply dark:text-white;
+  }
+  h3 {
+    @apply dark:text-white;
   }
 }
 
@@ -29,4 +36,30 @@ body {
   background: var(--background);
   color: var(--foreground);
   font-family: Arial, Helvetica, sans-serif;
+}
+
+@layer components {
+  .btn {
+    @apply w-[20.3rem] py-[0.7rem] my-[2.4rem] px-[4.28rem] text-[0.8rem] dark:bg-white dark:text-black   rounded-[3.88rem] bg-[#030712]  text-white;
+  }
+
+  .btn-apply {
+    @apply bg-[#030712] dark:bg-[#F1F1F1] text-white dark:text-black  pl-[2.59rem] pr-[1.93rem] rounded-r-[4rem] text-[0.875rem] font-medium;
+  }
+
+  .input-field {
+    @apply block  px-4 pt-3 text-sm text-[#919191] bg-transparent rounded-lg border border-[#D1D5DB] appearance-none placeholder-transparent focus:outline-none focus:border-[#111827] focus:ring-0 dark:text-white dark:border-gray-600 dark:focus:border-blue-500;
+  }
+
+  .input-field-label {
+    @apply absolute text-[0.7rem] text-gray-500 dark:text-gray-400 duration-300 transform -translate-y-4 scale-75 top-2 z-10 origin-[0] bg-white dark:bg-gray-900 px-2;
+  }
+
+  .input-field-phone {
+    @apply p-1.5 border text-[0.75rem] border-gray-300 rounded-r-md focus:outline-none px-3  focus:border-[#111827];
+  }
+
+  .invert-on-dark {
+    @apply dark:invert dark:brightness-200 transition duration-300;
+  }
 }
