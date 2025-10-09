@@ -23,7 +23,7 @@ export default function CheckoutPage() {
 
   {/**this particular API did not work that is why I won't be using it for now */}
 
-  // useEffect(() => {           this api only runs when the first time the page is loaded
+  // useEffect(() => {           this api only runs the first time the page is loaded
   //    axios.get('https://countrycode.dev/api/countries')
   // .then((response) => {
   //   setCountries(response.data)
@@ -51,7 +51,7 @@ export default function CheckoutPage() {
 
       {/* <Header /> */}
       <main>
-        <section className="flex flex-wrap bg-background dark text-primary border border-red-500 justify-center gap-[5rem]">
+        <section className="flex flex-wrap bg-background dark text-primary justify-center gap-[5rem]">
           {/* The first Div:Checkout */}
           <div className="w-[34rem] ">
             <h1 className="mt-[2.4rem] mb-[1.2rem] mr-[45rem] font-semibold text-[1.5rem]">
