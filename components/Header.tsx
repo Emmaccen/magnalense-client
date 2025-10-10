@@ -2,8 +2,9 @@
 
 import { useState } from "react"
 import Link from "next/link"
-import { Search, ShoppingBag, Menu, X } from "lucide-react"
+import { Search, Menu, X } from "lucide-react"
 import MobileMenu from "./mobile-menu"
+import Image from "next/image"
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -21,16 +22,16 @@ export default function Header() {
               MagnaLense.
             </Link>
             <nav className="hidden lg:flex items-center gap-6">
-              <Link href="/men" className="text-sm text-gray-600 hover:text-gray-900 hover:underline">
+              <Link href="/men" className="text-sm text-gray-400 hover:text-gray-900 hover:underline">
                 Men
               </Link>
-              <Link href="/women" className="text-sm text-gray-600 hover:text-gray-900 hover:underline">
+              <Link href="/women" className="text-sm text-gray-400 hover:text-gray-900 hover:underline">
                 Women
               </Link>
-              <Link href="/kids" className="text-sm text-gray-600 hover:text-gray-900 hover:underline">
+              <Link href="/kids" className="text-sm text-gray-400 hover:text-gray-900 hover:underline">
                 Kids
               </Link>
-              <Link href="/appointment" className="text-sm text-gray-600 hover:text-gray-900 hover:underline">
+              <Link href="/appointment" className="text-sm text-gray-400 hover:text-gray-900 hover:underline">
                 Appointment
               </Link>
             </nav>
@@ -40,7 +41,12 @@ export default function Header() {
               <Search className="h-5 w-5 text-gray-600" />
             </button>
             <button className="p-2 hover:bg-gray-100 rounded-full">
-              <ShoppingBag className="h-5 w-5 text-gray-600" />
+              <Image 
+                src="/images/shopping-bag.png"
+                alt="Cart Icon"
+                width={20}
+                height={20}
+              />
             </button>
             <button className="p-2 hover:bg-gray-100 rounded-full lg:hidden" onClick={toggleMobileMenu}>
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}

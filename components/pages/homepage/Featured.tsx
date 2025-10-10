@@ -1,7 +1,7 @@
 "use client";
 import Image from "next/image";
 import React, { useState } from "react";
-import { ChevronRight } from "lucide-react";
+import { ArrowDown } from "lucide-react";
 
 // Define types for our component
 interface ProductColor {
@@ -48,7 +48,7 @@ const FeaturedGrid: React.FC<FeaturedGridProps> = ({ products }) => {
               className={`px-4 py-1 rounded-full text-sm ${
                 filter === tab.id
                   ? "bg-black text-white"
-                  : "bg-white text-gray-700 border border-gray-300"
+                  : "bg-white text-black border border-black"
               }`}
             >
               {tab.label}
@@ -58,7 +58,7 @@ const FeaturedGrid: React.FC<FeaturedGridProps> = ({ products }) => {
       </div>
       <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-4">
         {products.map((product) => (
-          <div key={product.id} className="bg-gray-50 p-4 rounded-lg">
+          <div key={product.id} className="bg-[#F9FAFB] p-4 rounded-lg">
             {product.label && (
               <div className="text-xs font-medium mb-2 bg-white w-20 p-2 rounded-full">
                 {product.label}
@@ -108,8 +108,11 @@ const FeaturedGrid: React.FC<FeaturedGridProps> = ({ products }) => {
 
       <div className="flex justify-center mt-8">
         <button className="bg-black text-white px-4 py-2 rounded-full flex items-center text-sm">
-          See more <ChevronRight size={16} className="ml-1" />
-        </button>
+  See more
+  <span className="bg-white text-black rounded-full ml-2 p-1">
+    <ArrowDown size={12} />
+  </span>
+</button>
       </div>
     </div>
   );

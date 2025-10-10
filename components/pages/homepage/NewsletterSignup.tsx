@@ -17,10 +17,10 @@ export default function NewsletterSignup() {
   return (
     <div className="bg-[#F5F5F5] py-[60px] px-[40px]">
       <div className="max-w-[400px] mx-auto text-center">
-        <h2 className="text-[28px] font-bold text-black mb-[16px] leading-tight">10% Off Your First Order!</h2>
+        <h2 className="text-[28px] font-bold text-gray-600 mb-[16px] leading-tight">10% Off Your First Order!</h2>
 
-        <p className="text-[#666666] text-[16px] mb-[32px] leading-relaxed">
-          Stay updated on our latest collections, exclusive offers, and special promotions by signing up for our newsletter.
+        <p className="text-gray-600 text-[16px] mb-[32px] leading-relaxed">
+          Join our newsletter for exclusive offers, promotions, and the latest updates.
         </p>
 
         <form onSubmit={handleSubmit} className="flex items-center bg-white p-1 pl-6 pr-4 py-4 rounded-full max-w-md mx-auto">

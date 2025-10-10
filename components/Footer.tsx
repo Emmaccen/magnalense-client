@@ -19,7 +19,7 @@ export default function Footer() {
 
 
   return (
-    <div className="bg-[#111827] text-white">
+    <div className="bg-gray-800 text-white">
 
       {/* Main Hero Section */}
       <div className="px-[40px] py-[80px]">
@@ -33,14 +33,14 @@ export default function Footer() {
                 Dress them accordingly
               </h1>
 
-              <p className="text-[#B8C5D1] text-[18px] leading-relaxed">
+              <p className="text-white text-[18px] leading-relaxed">
                 With Hand-crafted, Detail-oriented frames, add colors, light and clarity to your Vision.
               </p>
             </div>
 
             {/* Right Email Signup */}
             <div className="flex justify-end">
-              <form onSubmit={handleSubmit} className="flex items-center bg-white p-1 pl-6 pr-4 py-4 rounded-full max-w-md mx-auto">
+              <form onSubmit={handleSubmit} className="flex items-center bg-white p-1 pl-6 pr-4 py-4 rounded-full w-full max-w-md mx-auto">
                         
                           <Mail className="h-5 w-5 text-gray-500 mr-2" />
                           <input
@@ -65,7 +65,7 @@ export default function Footer() {
       </div>
       
       {/* Footer */}
-<div className="border-t border-[#334155] px-[40px] py-[24px]">
+<div className="px-[40px] py-[24px]">
   <div className="max-w-[1200px] mx-auto flex flex-col sm:flex-row items-center sm:justify-between bg-white rounded-lg px-[24px] py-[16px] gap-4 sm:gap-0">
     {/* Social Icons */}
     <div className="flex items-center gap-[16px]">
@@ -81,10 +81,10 @@ export default function Footer() {
     </div>
 
     {/* Copyright */}
-    <div className="text-black text-[14px] text-center sm:text-left">&copy; {currentYear} MagnaLense. All rights reserved.</div>
+    <div className="text-gray-500 text-[14px] text-center sm:text-left">&copy; {currentYear} MagnaLense. All rights reserved.</div>
 
     {/* Brand */}
-    <div className="text-black text-[18px] font-bold text-center sm:text-left">MagnaLense.</div>
+    <div className="text-gray-700 text-[18px] font-bold text-center sm:text-left">MagnaLense.</div>
   </div>
 </div>
 

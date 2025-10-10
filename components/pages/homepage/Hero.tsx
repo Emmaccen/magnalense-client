@@ -6,8 +6,8 @@ export default function Hero() {
     <section className="w-full bg-gray-50 py-8 md:py-12 lg:py-16">
       <div className="container mx-auto px-4 md:px-6">
         <div className="flex flex-col items-center text-center space-y-8">
-          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight">Elegance Meets Style</h1>
-          <p className="text-gray-600 max-w-[600px] text-sm md:text-base">
+          <h1 className="text-3xl md:text-4xl lg:text-5xl font-semibold tracking-tight text-gray-500">Elegance Meets Style</h1>
+          <p className="text-gray-400 max-w-[600px] text-sm md:text-base">
             Explore a world of stylish eyewear, crafted for clarity and comfort.
           </p>
           <Link
@@ -18,40 +18,36 @@ export default function Hero() {
           </Link>
 
           <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-6 mt-8 md:mt-12">
-            <div className="relative transform rotate-[-8deg] hover:rotate-0 transition-transform duration-300">
+            <div>
               <Image
-                src="/images/femaleimg1.jpeg"
+                src="/images/femaleimg1.png"
                 alt="Person wearing purple glasses"
                 width={300}
                 height={300}
-                className="rounded-lg shadow-lg"
               />
             </div>
-            <div className="relative transform rotate-[8deg] hover:rotate-0 transition-transform duration-300">
+            <div className="">
               <Image
-                src="/images/maleimg1.jpeg"
+                src="/images/maleimg1.png"
                 alt="Person wearing black frame glasses"
                 width={300}
                 height={300}
-                className="rounded-lg shadow-lg"
               />
             </div>
-            <div className="relative transform rotate-[-8deg] hover:rotate-0 transition-transform duration-300">
+            <div className="">
               <Image
-                src="/images/femaleimg2.jpeg"
+                src="/images/femaleimg2.png"
                 alt="Person wearing red sunglasses"
                 width={300}
                 height={300}
-                className="rounded-lg shadow-lg"
               />
             </div>
-            <div className="relative transform rotate-[8deg] hover:rotate-0 transition-transform duration-300">
+            <div className="">
               <Image
-                src="/images/maleimg2.jpeg"
+                src="/images/maleimg2.png"
                 alt="Person wearing light frame glasses"
                 width={300}
                 height={300}
-                className="rounded-lg shadow-lg"
               />
             </div>
           </div>
