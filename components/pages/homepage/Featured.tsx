@@ -37,19 +37,18 @@ const FeaturedGrid: React.FC<FeaturedGridProps> = ({ products }) => {
   ];
 
   return (
-    <div className="w-full max-w-6xl mx-auto px-4 mt-10">
+    <div className="w-full max-w-6xl mx-auto px-4 mt-10 bg-white">
       <div className="mb-10 flex flex-col sm:flex-row justify-between items-center">
-        <h2 className="text-xl font-medium text-gray-700">Featured</h2>
+        <h2 className="text-xl font-bold text-gray-500">Featured</h2>
         <div className="flex space-x-2 mt-4 sm:mt-0">
           {filterTabs.map((tab) => (
             <button
               key={tab.id}
               onClick={() => setFilter(tab.id as FilterType)}
-              className={`px-4 py-1 rounded-full text-sm ${
-                filter === tab.id
+              className={`px-4 py-1 rounded-full text-sm ${filter === tab.id
                   ? "bg-black text-white"
                   : "bg-white text-black border border-black"
-              }`}
+                }`}
             >
               {tab.label}
             </button>
@@ -65,7 +64,7 @@ const FeaturedGrid: React.FC<FeaturedGridProps> = ({ products }) => {
               </div>
             )}
             <div className="h-32 sm:h-40 flex items-center justify-center mb-4">
-<Image
+              <Image
                 src={product.image}
                 alt={product.name}
                 width={180}
@@ -73,46 +72,50 @@ const FeaturedGrid: React.FC<FeaturedGridProps> = ({ products }) => {
                 className="max-h-full max-w-full object-contain"
                 style={{ objectFit: "contain" }}
               />
-              
+
             </div>
-            <div className="flex justify-between items-center">
+
               <div>
-                <h3 className="text-gray-700">{product.name}</h3>
-                <div className="flex space-x-1 mt-2">
+                <div className="flex justify-between items-center">
+                  <div>
+                    <h3 className="text-gray-700">{product.name}</h3>
+                  </div>
+
+                  <div className="">
+                    <span className="font-medium">${product.price}</span>
+                  </div>
+                </div>
+
+                <div className="flex space-x-3 mt-2">
                   {product.colors.map((colorOption) => (
                     <button
                       key={colorOption.id}
-                      className={`w-6 h-6 rounded-full ${
-                        colorOption.color === "white"
-                          ? "bg-white border border-gray-300"
-                          : colorOption.color === "blue"
-                          ? "bg-blue-600"
-                          : "bg-gray-300"
-                      } ${
-                        product.defaultColor === colorOption.id
-                          ? "ring-2 ring-offset-2 ring-gray-400"
+                      className={`w-12 h-12 rounded-full ${colorOption.color === "white"
+                        ? "bg-white border-4 border-[#D1D5DB]"
+                        : colorOption.color === "blue"
+                          ? "bg-blue-600 border-4 border-[#D1D5DB]"
+                          : "bg-gray-200"
+                        } ${product.defaultColor === colorOption.id
+                          ? "border-4 border-[#6B7280]"
                           : ""
-                      }`}
+                        }`}
                       aria-label={`Select ${colorOption.color} color`}
                     ></button>
                   ))}
                 </div>
               </div>
-              <div className="text-right">
-                <span className="font-medium">${product.price}</span>
-              </div>
-            </div>
+
           </div>
         ))}
       </div>
 
       <div className="flex justify-center mt-8">
         <button className="bg-black text-white px-4 py-2 rounded-full flex items-center text-sm">
-  See more
-  <span className="bg-white text-black rounded-full ml-2 p-1">
-    <ArrowDown size={12} />
-  </span>
-</button>
+          See more
+          <span className="bg-white text-black rounded-full ml-2 p-1">
+            <ArrowDown size={12} />
+          </span>
+        </button>
       </div>
     </div>
   );

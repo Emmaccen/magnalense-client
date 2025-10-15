@@ -12,7 +12,7 @@ export default function Hero() {
           </p>
           <Link
             href="/shop"
-            className="inline-flex items-center justify-center px-6 py-2 bg-black text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
+            className="inline-flex items-center justify-center px-6 py-2 bg-gray-900 text-white rounded-full text-sm font-medium hover:bg-gray-800 transition-colors"
           >
             Explore shop
           </Link>

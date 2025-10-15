@@ -14,7 +14,7 @@ export default function Header() {
   }
 
   return (
-    <header className="w-full py-4 px-4 md:px-6 bg-white shadow-sm">
+    <header className="w-full py-4 px-4 md:px-6 bg-gray-100 shadow-sm">
       <div className="container mx-auto">
         <div className="flex items-center justify-between">
           <div className="flex items-center gap-8">
