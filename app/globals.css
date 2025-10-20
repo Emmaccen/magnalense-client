@@ -13,29 +13,11 @@
 }
 
 @layer base {
-  body {
-    @apply text-black dark:text-white bg-white dark:bg-black;
-  }
-
-  p {
-    @apply dark:text-white;
-  }
-  h3 {
-    @apply dark:text-white;
-  }
-}
-
-@media (prefers-color-scheme: dark) {
-  :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
-  }
 }
 
 body {
   background: var(--background);
   color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
 }
 
 @layer components {
