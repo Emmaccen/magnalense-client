@@ -123,6 +123,9 @@ export default function review() {
 
   return (
     <>
+
+
+    
       <h3 className="font-medium text-[0.9rem] ">Review your order</h3>
 
       <p className="font-light text-[0.5rem]">

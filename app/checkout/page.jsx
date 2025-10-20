@@ -1,3 +1,4 @@
+
 "use client";
 import React from "react";
 //import Header from "@/components/header";
@@ -7,21 +8,27 @@ import { Tab, TabGroup, TabList, TabPanel, TabPanels } from "@headlessui/react";
 import { Field, Label, Radio, RadioGroup } from "@headlessui/react";
 import { useState, useEffect } from "react";
 import { CheckCircleIcon } from "@heroicons/react/24/solid";
-import Payment from "./payment";
-import Review from "./review";
+// import Payment from "./payment";
+// import Review from "./review";
 import { useRouter } from "next/navigation";
 import axios from "axios";
+import { lazy, Suspense } from "react";
+// import dynamic from "next/dynamic";
 
+
+// const checkout = lazy(() => import("./checkout"));
+const Payment = lazy(() => import("./payment"));
+const Review = lazy(() => import("./review"));
 
 export default function CheckoutPage() {
   const [selectPaymentMethod, setSelectPaymentMethod] = useState(null);
-  // const [selectDeliveryPaymentMethod, setSelectDeliveryPaymentMethod] = useState("");
-  const [inputText, setInputText] = useState('')
-  const router = useRouter() 
-  const [countries, setCountries] = useState([])
+  const [inputText, setInputText] = useState("");
+  const router = useRouter();
+  const [countries, setCountries] = useState([]);
 
-
-  {/**this particular API did not work that is why I won't be using it for now */}
+  {
+    /**this particular API did not work that is why I won't be using it for now */
+  }
 
   // useEffect(() => {           this api only runs the first time the page is loaded
   //    axios.get('https://countrycode.dev/api/countries')
@@ -30,21 +37,17 @@ export default function CheckoutPage() {
   // })
   // }, [])
 
-
-
-
-  function saveInputText(event){     //this function saves the data that is typed into the input fields 
-    setInputText(event.target.value)
+  function saveInputText(event) {
+    //this function saves the data that is typed into the input fields
+    setInputText(event.target.value);
   }
 
-  function handleContinueToPayment(){   //I want this button to take me to the payment page
-    router.push("/checkout/payment")   
+  function handleContinueToPayment() {
+    //I want this button to take me to the payment page
+    router.push("/checkout/payment");
   }
-
-
 
   return (
-
     <>
       <title>Checkout Page</title>
       <link rel="icon" type="image/svg+xml" href="/phone-solid-full.svg" />
@@ -73,9 +76,7 @@ export default function CheckoutPage() {
                 <Tab className="flex items-center w-[9.62rem] gap-[0.6rem] focus:outline-none">
                   {({ selected }) => (
                     <>
-                      <p className="text-[1rem] cursor-pointer">
-                        Information
-                      </p>
+                      <p className="text-[1rem] cursor-pointer">Information</p>
                       <div
                         className={`w-[1.6rem] h-[1.6rem] relative rounded-full px-3 py-1 text-white 
                     ${
@@ -97,9 +98,7 @@ export default function CheckoutPage() {
                 <Tab className="flex items-center w-[9.62rem] gap-[0.6rem] focus:outline-none">
                   {({ selected }) => (
                     <>
-                      <p className=" text-[1rem] cursor-pointer">
-                        Payment
-                      </p>
+                      <p className=" text-[1rem] cursor-pointer">Payment</p>
                       <div
                         className={`w-[1.6rem] h-[1.6rem] relative rounded-full px-3 py-1 text-white 
                     ${
@@ -121,9 +120,7 @@ export default function CheckoutPage() {
                 <Tab className="flex items-center w-[9.62rem] gap-[0.6rem] focus:outline-none">
                   {({ selected }) => (
                     <>
-                      <p className=" text-[1rem] cursor-pointer">
-                        Review
-                      </p>
+                      <p className=" text-[1rem] cursor-pointer">Review</p>
                       <div
                         className={`w-[1.6rem] h-[1.6rem] relative rounded-full px-3 py-1 text-white 
                     ${
@@ -146,280 +143,357 @@ export default function CheckoutPage() {
 
               <TabPanels>
                 <TabPanel>
-                  <div>
-                    <p className=" text-[0.9rem] font-medium">
-                      Customer Information
-                    </p>
-
-                    <div className="flex gap-[1.6rem]">
-                      <div className="">
-                        <div className="relative my-[0.8rem]">
-                          <input
-                            type="email"
-                            id="email"
-                            name="Email address"
-                            aria-label="Email address"
-                            required
-                            className="input-field peer w-[16.5rem]"
-                            placeholder="Email address"
-                            onChange={saveInputText}
-                          />
-                          <label
-                            htmlFor="email"
-                            className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                          >
-                            Email address
-                          </label>
-                        </div>
-
-                      </div>
-
-                      <div className="flex items-center w-full max-w-md">
-                        <select className="p-2 border text-[#4B5563] text-[0.75rem] border-[#D1D5DB] rounded-l-md focus:outline-none   focus:border-[#111827]">
-                          <option value="+234"> +234</option>
-                          <option value="+1"> +1</option>
-                          <option value="+44"> +44</option>
-                          <option value="+91"> +91</option>
-                        </select>
-
-                        <input
-                          type="tel"
-                          aria-label="Phone number"
-                          placeholder="Phone number"
-                          className="flex w-[12rem] peer input-field-phone"
-                        />
-                      </div>
-
-                      
-                    </div>
-
-                    <div className="my-[2rem]">
-                      <p className="text-[0.9rem] font-medium">
-                        Shipping address
+                  <Suspense
+                      fallback={
+  <div className="flex items-center justify-center ">
+    <div role="status">
+      <svg
+        aria-hidden="true"
+        className="w-8 h-8 text-gray-200 animate-spin bg-black dark:text-gray-600 fill-blue-600"
+        viewBox="0 0 100 101"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+          fill="currentColor"
+        />
+        <path
+          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+          fill="currentFill"
+        />
+      </svg>
+      <span className="sr-only">Loading...</span>
+    </div>
+  </div>
+                           }
+                  >
+                    <div>
+                      <p className=" text-[0.9rem] font-medium">
+                        Customer Information
                       </p>
-                      <div className="flex gap-[1.6rem] relative my-[0.8rem]">
-                        <div className="relative ">
-                          <input
-                            id="First name"
-                            type="text"
-                            name="First name"
-                            aria-label="First name"
-                            required
-                            className="input-field peer w-[16.2rem]"
-                            placeholder="First name"
-                          />
-                          <label
-                            htmlFor="First name"
-                            className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                          >
-                            First name
-                          </label>
-                        </div>
-                        <div className="relative w-[20rem]">
-                          <input
-                            type="text"
-                            id="Last name"
-                            name="Last name"
-                            aria-label="Last name"
-                            required
-                            className="input-field peer w-[16.2rem]"
-                            placeholder="Last name"
-                          />
-                          <label
-                            htmlFor="Last name"
-                            className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                          >
-                            Last name
-                          </label>
-                        </div>
-                      </div>
 
-                      <div className="flex gap-[1.6rem] my-[1rem]">
-                        <div className="flex items-center   max-w-md">
-
-                          {/* {countries.map((country) => { */}
-                          {/* return( */}
-                          <select className="w-[16.2rem] py-2 px-[1rem] text-[0.7rem] border  text-[#4B5563]  border-[#D1D5DB] rounded-[0.63rem] focus:outline-none focus:ring-1 focus:ring-[#111827]">
-                            <option value="+234" className="text-[#4B5563] ">
-                             Country
-                              {/* {country.name} */}
-                            </option>
-                            <option value="+234" className="text-[#4B5563]">
-                              {/* {country.code} */}
-                              +234
-                            </option>
-                            <option value="+1" className="text-[#4B5563]">
-                              +1
-                            </option>
-                            <option value="+44" className="text-[#4B5563]">
-                              +44
-                            </option>
-                            <option value="+91" className="text-[#4B5563]">
-                              +91
-                            </option>
-                          </select>
-                          {/* )
-                          })} */}
-                        </div>
-
-                        <div className="flex items-center max-w-md">
-                          <select className="w-[16.2rem] py-2 text-[0.7rem] px-[1rem] border  text-[#4B5563]  border-[#D1D5DB] rounded-[0.63rem] focus:outline-none focus:ring-1 focus:ring-[#111827]">
-                            <option value="+234" className="text-[#4B5563]">
-                              State
-                            </option>
-                            <option value="+234" className="text-[#4B5563]">
-                              +234
-                            </option>
-                            <option value="+1" className="text-[#4B5563]">
-                              +1
-                            </option>
-                            <option value="+44" className="text-[#4B5563]">
-                              +44
-                            </option>
-                            <option value="+91" className="text-[#4B5563]">
-                              +91
-                            </option>
-                          </select>
-                        </div>
-                      </div>
-                    </div>
-
-                    <div className="relative w-[20rem] my-[1rem]">
-                     
-                      <input
-                        type="text"
-                        id="Address"
-                        name="Address"
-                        aria-label="Address"
-                        required
-                        className="input-field peer  w-[33.8rem]"
-                        placeholder="Address"
-                      />  
-                      
-                       <label htmlFor="floating_outlined" 
-                       className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1">Address</label> 
-                    </div>
-
-          
-
-                    <div className="my-[2rem]">
-                      <p className=" text-[0.9rem] text-[#030712] ">
-                        Billing address
-                      </p>
-                      <div className="flex gap-[1.6rem] my-[0.6rem]">
-                        <div className="relative w-[20rem]">
-                          <input
-                            type="text"
-                            id="First name"
-                            name="First name"
-                            aria-label="First name"
-                            required
-                            className="input-field peer  w-[16.2rem]"
-                            placeholder="First name"
-                          />
-                          <label
-                            htmlFor="First name"
-                            className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                          >
-                            First name
-                          </label>
-                        </div>
-                        <div className="relative w-[20rem]">
-                          <input
-                            type="text"
-                            id="Last name"
-                            name="Last name"
-                            aria-label="Last name"
-                            required
-                            className="input-field peer  w-[16.2rem]"
-                            placeholder="Last name"
-                          />
-                          <label
-                            htmlFor="Last name"
-                            className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                          >
-                            Last name
-                          </label>
-                        </div>
-                      </div>
-
-                      <div className="flex gap-[1.6rem] my-[1rem] ">
-                        <div className="flex items-center   max-w-md">
-                          <select className="w-[16.2rem] py-2 px-[1rem] border text-[0.7rem] text-[#4B5563]  border-[#D1D5DB] rounded-[0.63rem] focus:outline-none focus:ring-1 focus:ring-[#111827]">
-                            <option
-                              value="+234"
-                              className="text-[#4B5563] text-[0.7rem] "
+                      <div className="flex gap-[1.6rem]">
+                        <div className="">
+                          <div className="relative my-[0.8rem]">
+                            <input
+                              type="email"
+                              id="email"
+                              name="Email address"
+                              aria-label="Email address"
+                              required
+                              className="input-field peer w-[16.5rem]"
+                              placeholder="Email address"
+                              onChange={saveInputText}
+                            />
+                            <label
+                              htmlFor="email"
+                              className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
                             >
-                              Country
-                            </option>
-                            <option value="+234" className="text-[#4B5563]">
-                              +234
-                            </option>
-                            <option value="+1" className="text-[#4B5563]">
-                              +1
-                            </option>
-                            <option value="+44" className="text-[#4B5563]">
-                              +44
-                            </option>
-                            <option value="+91" className="text-[#4B5563]">
-                              +91
-                            </option>
-                          </select>
+                              Email address
+                            </label>
+                          </div>
                         </div>
+
                         <div className="flex items-center w-full max-w-md">
-                          <select className="w-[16.2rem] py-2 px-[1rem] text-[0.7rem] border  text-[#4B5563]  border-[#D1D5DB] rounded-[0.63rem] focus:outline-none focus:ring-1  focus:ring-[#111827]">
-                            <option value="State" className="text-[#4B5563]">
-                              State
-                            </option>
-                            <option value="+234" className="text-[#4B5563]">
-                              +234
-                            </option>
-                            <option value="+1" className="text-[#4B5563]">
-                              +1
-                            </option>
-                            <option value="+44" className="text-[#4B5563]">
-                              +44
-                            </option>
-                            <option value="+91" className="text-[#4B5563]">
-                              +91
-                            </option>
+                          <select className="p-2 border text-[#4B5563] text-[0.75rem] border-[#D1D5DB] rounded-l-md focus:outline-none   focus:border-[#111827]">
+                            <option value="+234"> +234</option>
+                            <option value="+1"> +1</option>
+                            <option value="+44"> +44</option>
+                            <option value="+91"> +91</option>
                           </select>
+
+                          <input
+                            type="tel"
+                            aria-label="Phone number"
+                            placeholder="Phone number"
+                            className="flex w-[12rem] peer input-field-phone"
+                          />
                         </div>
                       </div>
-                    </div>
 
-                    <div className="relative w-[20rem] my-[1rem]">
-                      <input
-                        type="text"
-                        id="Address"
-                        name="Address"
-                        aria-label="Address"
-                        required
-                        className="peer w-[33.8rem] input-field"
-                        placeholder="Address"
-                      />
-                      <label
-                        htmlFor="Address"
-                        className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                      >
-                        Address
-                      </label>
-                    </div>
+                      <div className="my-[2rem]">
+                        <p className="text-[0.9rem] font-medium">
+                          Shipping address
+                        </p>
+                        <div className="flex gap-[1.6rem] relative my-[0.8rem]">
+                          <div className="relative ">
+                            <input
+                              id="First name"
+                              type="text"
+                              name="First name"
+                              aria-label="First name"
+                              required
+                              className="input-field peer w-[16.2rem]"
+                              placeholder="First name"
+                            />
+                            <label
+                              htmlFor="First name"
+                              className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+                            >
+                              First name
+                            </label>
+                          </div>
+                          <div className="relative w-[20rem]">
+                            <input
+                              type="text"
+                              id="Last name"
+                              name="Last name"
+                              aria-label="Last name"
+                              required
+                              className="input-field peer w-[16.2rem]"
+                              placeholder="Last name"
+                            />
+                            <label
+                              htmlFor="Last name"
+                              className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+                            >
+                              Last name
+                            </label>
+                          </div>
+                        </div>
 
-                    <button 
-                    onClick={handleContinueToPayment}
-                    className="btn">
-                      Continue to payment
-                    </button>
-                  </div>
+                        <div className="flex gap-[1.6rem] my-[1rem]">
+                          <div className="flex items-center   max-w-md">
+                            {/* {countries.map((country) => { */}
+                            {/* return( */}
+                            <select className="w-[16.2rem] py-2 px-[1rem] text-[0.7rem] border  text-[#4B5563]  border-[#D1D5DB] rounded-[0.63rem] focus:outline-none focus:ring-1 focus:ring-[#111827]">
+                              <option value="+234" className="text-[#4B5563] ">
+                                Country
+                                {/* {country.name} */}
+                              </option>
+                              <option value="+234" className="text-[#4B5563]">
+                                {/* {country.code} */}
+                                +234
+                              </option>
+                              <option value="+1" className="text-[#4B5563]">
+                                +1
+                              </option>
+                              <option value="+44" className="text-[#4B5563]">
+                                +44
+                              </option>
+                              <option value="+91" className="text-[#4B5563]">
+                                +91
+                              </option>
+                            </select>
+                            {/* )
+                          })} */}
+                          </div>
+
+                          <div className="flex items-center max-w-md">
+                            <select className="w-[16.2rem] py-2 text-[0.7rem] px-[1rem] border  text-[#4B5563]  border-[#D1D5DB] rounded-[0.63rem] focus:outline-none focus:ring-1 focus:ring-[#111827]">
+                              <option value="+234" className="text-[#4B5563]">
+                                State
+                              </option>
+                              <option value="+234" className="text-[#4B5563]">
+                                +234
+                              </option>
+                              <option value="+1" className="text-[#4B5563]">
+                                +1
+                              </option>
+                              <option value="+44" className="text-[#4B5563]">
+                                +44
+                              </option>
+                              <option value="+91" className="text-[#4B5563]">
+                                +91
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="relative w-[20rem] my-[1rem]">
+                        <input
+                          type="text"
+                          id="Address"
+                          name="Address"
+                          aria-label="Address"
+                          required
+                          className="input-field peer  w-[33.8rem]"
+                          placeholder="Address"
+                        />
+
+                        <label
+                          htmlFor="floating_outlined"
+                          className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+                        >
+                          Address
+                        </label>
+                      </div>
+
+                      <div className="my-[2rem]">
+                        <p className=" text-[0.9rem] text-[#030712] ">
+                          Billing address
+                        </p>
+                        <div className="flex gap-[1.6rem] my-[0.6rem]">
+                          <div className="relative w-[20rem]">
+                            <input
+                              type="text"
+                              id="First name"
+                              name="First name"
+                              aria-label="First name"
+                              required
+                              className="input-field peer  w-[16.2rem]"
+                              placeholder="First name"
+                            />
+                            <label
+                              htmlFor="First name"
+                              className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+                            >
+                              First name
+                            </label>
+                          </div>
+                          <div className="relative w-[20rem]">
+                            <input
+                              type="text"
+                              id="Last name"
+                              name="Last name"
+                              aria-label="Last name"
+                              required
+                              className="input-field peer  w-[16.2rem]"
+                              placeholder="Last name"
+                            />
+                            <label
+                              htmlFor="Last name"
+                              className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+                            >
+                              Last name
+                            </label>
+                          </div>
+                        </div>
+
+                        <div className="flex gap-[1.6rem] my-[1rem] ">
+                          <div className="flex items-center   max-w-md">
+                            <select className="w-[16.2rem] py-2 px-[1rem] border text-[0.7rem] text-[#4B5563]  border-[#D1D5DB] rounded-[0.63rem] focus:outline-none focus:ring-1 focus:ring-[#111827]">
+                              <option
+                                value="+234"
+                                className="text-[#4B5563] text-[0.7rem] "
+                              >
+                                Country
+                              </option>
+                              <option value="+234" className="text-[#4B5563]">
+                                +234
+                              </option>
+                              <option value="+1" className="text-[#4B5563]">
+                                +1
+                              </option>
+                              <option value="+44" className="text-[#4B5563]">
+                                +44
+                              </option>
+                              <option value="+91" className="text-[#4B5563]">
+                                +91
+                              </option>
+                            </select>
+                          </div>
+                          <div className="flex items-center w-full max-w-md">
+                            <select className="w-[16.2rem] py-2 px-[1rem] text-[0.7rem] border  text-[#4B5563]  border-[#D1D5DB] rounded-[0.63rem] focus:outline-none focus:ring-1  focus:ring-[#111827]">
+                              <option value="State" className="text-[#4B5563]">
+                                State
+                              </option>
+                              <option value="+234" className="text-[#4B5563]">
+                                +234
+                              </option>
+                              <option value="+1" className="text-[#4B5563]">
+                                +1
+                              </option>
+                              <option value="+44" className="text-[#4B5563]">
+                                +44
+                              </option>
+                              <option value="+91" className="text-[#4B5563]">
+                                +91
+                              </option>
+                            </select>
+                          </div>
+                        </div>
+                      </div>
+
+                      <div className="relative w-[20rem] my-[1rem]">
+                        <input
+                          type="text"
+                          id="Address"
+                          name="Address"
+                          aria-label="Address"
+                          required
+                          className="peer w-[33.8rem] input-field"
+                          placeholder="Address"
+                        />
+                        <label
+                          htmlFor="Address"
+                          className="input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+                        >
+                          Address
+                        </label>
+                      </div>
+
+                      <button onClick={handleContinueToPayment} className="btn">
+                        Continue to payment
+                      </button>
+                    </div>
+                  </Suspense>
                 </TabPanel>
                 <TabPanel>
-                  {/**the Payment Options were here */}
+                  {/**the Payment Options are here */}
+
+                  <Suspense
+                  fallback={
+  <div className="flex items-center justify-center ">
+    <div role="status">
+      <svg
+        aria-hidden="true"
+        className="w-8 h-8 text-gray-200 animate-spin bg-black dark:text-gray-600 fill-blue-600"
+        viewBox="0 0 100 101"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+          fill="currentColor"
+        />
+        <path
+          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+          fill="currentFill"
+        />
+      </svg>
+      <span className="sr-only">Loading...</span>
+    </div>
+  </div>
+                           }
+
+                  >
                   <Payment />
+
+                  </Suspense>
                 </TabPanel>
 
                 <TabPanel>
+                  <Suspense
+                      fallback={
+  <div className="flex items-center justify-center ">
+    <div role="status">
+      <svg
+        aria-hidden="true"
+        className="w-8 h-8 text-gray-200 animate-spin bg-black dark:text-gray-600 fill-blue-600"
+        viewBox="0 0 100 101"
+        fill="none"
+        xmlns="http://www.w3.org/2000/svg"
+      >
+        <path
+          d="M100 50.5908C100 78.2051 77.6142 100.591 50 100.591C22.3858 100.591 0 78.2051 0 50.5908C0 22.9766 22.3858 0.59082 50 0.59082C77.6142 0.59082 100 22.9766 100 50.5908ZM9.08144 50.5908C9.08144 73.1895 27.4013 91.5094 50 91.5094C72.5987 91.5094 90.9186 73.1895 90.9186 50.5908C90.9186 27.9921 72.5987 9.67226 50 9.67226C27.4013 9.67226 9.08144 27.9921 9.08144 50.5908Z"
+          fill="currentColor"
+        />
+        <path
+          d="M93.9676 39.0409C96.393 38.4038 97.8624 35.9116 97.0079 33.5539C95.2932 28.8227 92.871 24.3692 89.8167 20.348C85.8452 15.1192 80.8826 10.7238 75.2124 7.41289C69.5422 4.10194 63.2754 1.94025 56.7698 1.05124C51.7666 0.367541 46.6976 0.446843 41.7345 1.27873C39.2613 1.69328 37.813 4.19778 38.4501 6.62326C39.0873 9.04874 41.5694 10.4717 44.0505 10.1071C47.8511 9.54855 51.7191 9.52689 55.5402 10.0491C60.8642 10.7766 65.9928 12.5457 70.6331 15.2552C75.2735 17.9648 79.3347 21.5619 82.5849 25.841C84.9175 28.9121 86.7997 32.2913 88.1811 35.8758C89.083 38.2158 91.5421 39.6781 93.9676 39.0409Z"
+          fill="currentFill"
+        />
+      </svg>
+      <span className="sr-only">Loading...</span>
+    </div>
+  </div>
+                           }
+                  >
+
                   <Review />
+                  </Suspense>
                 </TabPanel>
               </TabPanels>
             </TabGroup>
@@ -455,26 +529,16 @@ export default function CheckoutPage() {
             </div>
 
             <div className="flex justify-between">
-              <p className=" text-[0.8rem] font-medium ">
-                Subtotal:
-              </p>
-              <p className=" font-semibold text-[0.8rem]">
-                $75.00
-              </p>
+              <p className=" text-[0.8rem] font-medium ">Subtotal:</p>
+              <p className=" font-semibold text-[0.8rem]">$75.00</p>
             </div>
             <div className="flex justify-between  my-[0.8rem]">
-              <p className="text-[0.8rem] font-medium">
-                Shipping:
-              </p>
-              <p className=" font-semibold text-[0.8rem]">
-                $2.99
-              </p>
+              <p className="text-[0.8rem] font-medium">Shipping:</p>
+              <p className=" font-semibold text-[0.8rem]">$2.99</p>
             </div>
             <div className="flex justify-between  my-[1.31rem]">
               <p className="text-[0.8rem] font-medium">Tax:</p>
-              <p className="font-semibold text-[0.8rem]">
-                $2.99
-              </p>
+              <p className="font-semibold text-[0.8rem]">$2.99</p>
             </div>
             <div className="border my-[1.65rem] border-[#F1F1F1] "></div>
             <div className="my-[2rem] ">
@@ -491,15 +555,13 @@ export default function CheckoutPage() {
                   className="text-[0.7rem] w-[20.3rem] peer text-[#030712 font-medium  px-[1.64rem] py-[0.65rem] rounded-l-[4.2rem] border border-[#D1D5DB]"
                   placeholder="Ralph007"
                 ></input>
-                 <label
-                            htmlFor="text"
-                            className=" input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
-                          >
-                            Discount Code
-                                                    </label>
-                <button className="btn-apply">
-                  Apply
-                </button>
+                <label
+                  htmlFor="text"
+                  className=" input-field-label peer-focus:px-2 peer-focus:text-[#919191] peer-focus:dark:text-[#919191] peer-placeholder-shown:scale-100 peer-placeholder-shown:-translate-y-1/2 peer-placeholder-shown:top-1/2 peer-focus:top-2 peer-focus:scale-75 peer-focus:-translate-y-4 rtl:peer-focus:translate-x-1/4 rtl:peer-focus:left-auto start-1"
+                >
+                  Discount Code
+                </label>
+                <button className="btn-apply">Apply</button>
               </div>
 
               <div className="flex justify-between my-[1.24rem]">
@@ -512,9 +574,7 @@ export default function CheckoutPage() {
               <div className=" border border-[#F1F1F1] "></div>
             </div>
 
-            <button className="btn ">
-              Place Order
-            </button>
+            <button className="btn ">Place Order</button>
           </div>
         </section>
       </main>
