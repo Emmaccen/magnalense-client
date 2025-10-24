@@ -1,7 +1,5 @@
 import FeaturedGrid from './Featured';
 
-// Example usage with demo data
-
 // Define types for our component
 interface ProductColor {
     id: string;
@@ -20,7 +18,6 @@ interface Product {
 
 
 const FeaturedEyewearProductPage: React.FC = () => {
-    // Sample data that matches the images
     const demoProducts: Product[] = [
       {
         id: '1',
