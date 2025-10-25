@@ -30,7 +30,7 @@ body {
   }
 
   .input-field {
-    @apply block  px-4 pt-3 text-sm text-[#919191] bg-transparent rounded-lg border border-[#D1D5DB] appearance-none placeholder-transparent focus:outline-none focus:border-[#111827] focus:ring-0 dark:text-white dark:border-gray-600 dark:focus:border-blue-500;
+    @apply block  px-4 pt-3 text-sm text-[#111827] bg-transparent rounded-lg border border-[#D1D5DB] appearance-none placeholder-transparent focus:outline-none focus:border-[#111827] focus:ring-0 dark:text-white dark:border-gray-600 dark:focus:border-blue-500;
   }
 
   .input-field-label {
