@@ -1,6 +1,7 @@
 "use client"
 
 import { Star } from "lucide-react"
+import { useCart } from "@/context/CartContext"
 
 interface ProductDetailsProps {
   selectedColor: string
@@ -18,6 +19,8 @@ const ProductDetails = ({
   quantity,
   setQuantity,
 }: ProductDetailsProps) => {
+  const { addItem } = useCart()
+
   const colors = [
     { name: "white", hex: "#FFFFFF", border: "#E5E5E5" },
     { name: "black", hex: "#000000", border: "#000000" },
@@ -26,12 +29,16 @@ const ProductDetails = ({
   ]
 
   const handleAddToCart = () => {
-    console.log("Added to cart:", {
-      product: "Juliet Stylish",
+    addItem({
+      id: "juliet-stylish",
+      name: "Juliet Stylish",
+      price: 15000,
       color: selectedColor,
       size: selectedSize,
       quantity,
+      image: "/images/cartFrame23.png",
     })
+    setQuantity(1)
   }
 
   return (

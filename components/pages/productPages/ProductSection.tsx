@@ -3,6 +3,7 @@
 import { useState } from "react"
 import ProductCarousel from "./ProductCarousel"
 import ProductDetails from "./ProductDetails"
+import CartDrawer from "./CartDrawer"
 
 const ProductSection = () => {
   const [selectedColor, setSelectedColor] = useState("black")
@@ -32,7 +33,9 @@ const ProductSection = () => {
           </div>
         </div>
       </div>
+      <CartDrawer />
     </div>
+
   )
 }
 

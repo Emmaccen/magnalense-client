@@ -51,6 +51,7 @@ const RelatedProducts: React.FC = () => {
         id: '3',
         name: 'Carlton',
         price: 15,
+        
         image: '/images/imageProduct40.png',
         label: 'Flash Sale',
         colors: [
