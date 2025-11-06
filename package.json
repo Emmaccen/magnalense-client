@@ -12,7 +12,10 @@
     "@headlessui/react": "^2.2.8",
     "@heroicons/react": "^2.2.0",
     "axios": "^1.12.2",
+ new-checkout
+    "dayjs": "^1.11.18",
     "lucide-react": "^0.545.0",
+   dev
     "next": "15.5.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
