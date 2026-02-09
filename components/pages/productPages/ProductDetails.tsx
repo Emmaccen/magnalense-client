@@ -2,6 +2,7 @@
 
 import { Star } from "lucide-react"
 import { useCart } from "@/context/CartContext"
+import { useEffect } from "react"
 
 interface ProductDetailsProps {
   selectedColor: string
@@ -19,7 +20,7 @@ const ProductDetails = ({
   quantity,
   setQuantity,
 }: ProductDetailsProps) => {
-  const { addItem } = useCart()
+  const { items, addItem, updateQuantity, openCart } = useCart()
 
   const colors = [
     { name: "white", hex: "#FFFFFF", border: "#E5E5E5" },
@@ -28,17 +29,56 @@ const ProductDetails = ({
     { name: "blue", hex: "#0000FF", border: "#0000FF" },
   ]
 
-  const handleAddToCart = () => {
-    addItem({
-      id: "juliet-stylish",
-      name: "Juliet Stylish",
-      price: 15000,
-      color: selectedColor,
-      size: selectedSize,
-      quantity,
-      image: "/images/cartFrame23.png",
+  // Base price per item
+  const basePrice = 15000
+  
+  // Calculate total price based on quantity
+  const totalPrice = basePrice * quantity
+
+  // Format price with commas
+  const formatPrice = (price: number): string => {
+    return price.toLocaleString('en-NG', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
     })
-    setQuantity(1)
+  }
+
+  // Create unique ID based on product, color, and size
+  const getItemId = () => `juliet-stylish-${selectedColor}-${selectedSize}`
+
+  // Sync quantity with cart when cart drawer closes or item changes
+  useEffect(() => {
+    const itemId = getItemId()
+    const cartItem = items.find(item => item.id === itemId)
+    
+    if (cartItem) {
+      // Sync the product details quantity with cart quantity
+      setQuantity(cartItem.quantity)
+    }
+  }, [items, selectedColor, selectedSize, setQuantity])
+
+  const handleAddToCart = () => {
+    const itemId = getItemId()
+    const existingItem = items.find(item => item.id === itemId)
+
+    if (existingItem) {
+      // Update quantity of existing item
+      updateQuantity(itemId, quantity)
+    } else {
+      // Add new item to cart
+      addItem({
+        id: itemId,
+        name: "Juliet Stylish",
+        price: basePrice,
+        color: selectedColor,
+        size: selectedSize,
+        quantity,
+        image: "/images/cartFrame23.png",
+      })
+    }
+
+    // Open cart drawer immediately after adding to cart
+    openCart()
   }
 
   return (
@@ -60,7 +100,12 @@ const ProductDetails = ({
 
       {/* Price */}
       <div>
-        <p className="text-[32px] font-bold text-[#1a1a1a]">₦15,000.00</p>
+        <p className="text-[32px] font-bold text-[#1a1a1a]">₦{formatPrice(totalPrice)}</p>
+        {quantity > 1 && (
+          <p className="text-[14px] text-[#666666] mt-1">
+            ₦{formatPrice(basePrice)} × {quantity}
+          </p>
+        )}
       </div>
 
       {/* Frame Color */}
@@ -120,16 +165,14 @@ const ProductDetails = ({
             >
               +
             </button>
-
-            
           </div>
            {/* Add to Cart Button */}
-      <button
-        onClick={handleAddToCart}
-        className="w-full bg-[#000000] hover:bg-[#1a1a1a] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 cursor-pointer text-[16px] active:scale-95"
-      >
-        Add to Cart
-      </button>
+          <button
+            onClick={handleAddToCart}
+            className="w-full bg-[#000000] hover:bg-[#1a1a1a] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 cursor-pointer text-[16px] active:scale-95"
+          >
+            Add to Cart
+          </button>
         </div>
       </div>
     </div>

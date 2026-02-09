@@ -5,6 +5,7 @@ import Link from "next/link"
 import { Search, Menu, X } from "lucide-react"
 import MobileMenu from "./mobile-menu"
 import Image from "next/image"
+import CartButton from "@/components/CartButton"
 
 export default function Header() {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
@@ -34,6 +35,7 @@ export default function Header() {
               <Link href="/appointment" className="text-sm text-gray-400 hover:text-gray-900 hover:underline">
                 Appointment
               </Link>
+
             </nav>
           </div>
           <div className="flex items-center gap-4">
@@ -48,6 +50,8 @@ export default function Header() {
                 height={20}
               />
             </button>
+            {/* Cart Button - This opens the cart drawer */}
+            <CartButton />
             <button className="p-2 hover:bg-gray-100 rounded-full lg:hidden" onClick={toggleMobileMenu}>
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </button>
