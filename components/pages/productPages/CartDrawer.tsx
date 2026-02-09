@@ -2,12 +2,27 @@
 
 import { X, Trash2 } from "lucide-react"
 import { useCart } from "@/context/CartContext"
+import { useRouter } from "next/navigation"
 import Image from "next/image"
 
 const CartDrawer = () => {
   const { items, isOpen, closeCart, removeItem, updateQuantity, getSubtotal } = useCart()
+  const router = useRouter()
 
   if (!isOpen) return null
+
+  const handleCheckout = () => {
+    closeCart()
+    router.push("/checkout")
+  }
+
+  // Format price with commas
+  const formatPrice = (price: number): string => {
+    return price.toLocaleString('en-NG', {
+      minimumFractionDigits: 2,
+      maximumFractionDigits: 2
+    })
+  }
 
   return (
     <>
@@ -78,7 +93,7 @@ const CartDrawer = () => {
                       Size: <span className="font-medium">{item.size}</span>
                     </p>
                     <p className="text-[14px] font-bold text-[#1a1a1a] mt-2">
-                      ₦{(item.price * item.quantity).toLocaleString()}
+                      ₦{formatPrice(item.price * item.quantity)}
                     </p>
 
                     {/* Quantity Controls */}
@@ -122,10 +137,13 @@ const CartDrawer = () => {
           <div className="border-t border-[#F5F5F5] p-6 space-y-4">
             <div className="flex items-center justify-between">
               <span className="text-[14px] text-[#666666]">Subtotal:</span>
-              <span className="text-[18px] font-bold text-[#1a1a1a]">₦{getSubtotal().toLocaleString()}</span>
+              <span className="text-[18px] font-bold text-[#1a1a1a]">₦{formatPrice(getSubtotal())}</span>
             </div>
-            <button className="w-full bg-[#000000] hover:bg-[#1a1a1a] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 cursor-pointer text-[14px] active:scale-95">
-              Add to Cart
+            <button 
+              onClick={handleCheckout}
+              className="w-full bg-[#000000] hover:bg-[#1a1a1a] text-white font-semibold py-3 px-6 rounded-full transition-all duration-200 cursor-pointer text-[14px] active:scale-95"
+            >
+              Checkout
             </button>
           </div>
         )}
